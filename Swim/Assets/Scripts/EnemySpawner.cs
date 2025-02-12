@@ -4,8 +4,9 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab; 
     public float spawnInterval = 2f; 
-    private float timer; 
- 
+    private float timer;
+    private bool stopSpawning = false; // Flag to stop spawning
+
     void Update() 
     {
         timer += Time.deltaTime; 
@@ -18,8 +19,11 @@ public class EnemySpawner : MonoBehaviour
  
     void SpawnEnemy() // Spawns an enemy at the right edge of the screen
     {
+        if(GameManager.Instance.isGameOver != true){
         float spawnX = Camera.main.ViewportToWorldPoint(new Vector3(1f, 0f, 0f)).x; 
         float spawnY = Random.Range(-Camera.main.orthographicSize, Camera.main.orthographicSize); 
         Instantiate(enemyPrefab, new Vector3(spawnX, spawnY, 0f), Quaternion.identity); 
+        }
     }
+   
 }

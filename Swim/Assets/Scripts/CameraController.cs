@@ -24,6 +24,11 @@ public class CameraController: MonoBehaviour
 
     void Update()
     {
+        // Stop background movement if the game is over
+        if (GameManager.Instance != null && GameManager.Instance.isGameOver)
+        {
+            return;
+        }
         // Move the backgrounds
         farBackground.position += new Vector3(
             scrollDirection.x * farBackgroundSpeed * Time.deltaTime, 

@@ -57,4 +57,21 @@ public class player : MonoBehaviour
             transform.position = new Vector2(transform.position.x, 0);
         }
     }
+
+    // This method is called when the player collides with another object
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // Notify the GameController that the game is over
+            GameManager.Instance.GameOver();
+
+            // Freeze player movement
+            rb.linearVelocity = Vector2.zero;
+            rb.isKinematic = true;
+
+            // Play dolphin sound
+            SoundManager.Instance.PlayDolphinSound();
+        }
+    }
 }
